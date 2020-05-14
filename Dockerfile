@@ -8,7 +8,7 @@ ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
 
 RUN apt update && apt upgrade -yq &&\
-    apt install python3
+    apt install python3 -y
 
 RUN adduser --disabled-password \
     --gecos "Default user" \
