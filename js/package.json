@@ -1,0 +1,46 @@
+{
+  "name": "jupyter-widget-hwt",
+  "version": "0.0.1",
+  "description": "A Jupyter witdgets for visualization of hwt based circuits.",
+  "author": "Michal Orsak",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nic30/jupyter-widget-hwt.git"
+  },
+  "keywords": [
+    "jupyter",
+    "widgets",
+    "ipython",
+    "ipywidgets",
+    "jupyterlab-extension",
+    "hwt"
+  ],
+  "files": [
+    "lib/**/*.js",
+    "dist/*.js",
+    "lib/**/*.css",
+    "dist/*.css"
+  ],
+  "scripts": {
+    "clean": "rimraf dist/",
+    "prepublish": "webpack",
+    "build": "webpack",
+    "watch": "webpack --watch --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "webpack": "^3.5.5",
+    "rimraf": "^2.6.1",
+	"style-loader": "^0.18.2",
+	"css-loader": "^0.28.4"
+  },
+  "dependencies": {
+    "@jupyter-widgets/base": "^3.0.0",
+    "lodash": "^4.17.4",
+    "d3-hwschematic": ">=0.1.0"
+  },
+  "jupyterlab": {
+    "extension": "lib/labplugin"
+  }
+}

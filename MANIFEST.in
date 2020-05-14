@@ -1,0 +1,2 @@
+recursive-include jupyter-widget-hwt/static *.*
+include jupyter-widget-hwt.json
