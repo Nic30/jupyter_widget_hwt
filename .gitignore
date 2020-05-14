@@ -9,6 +9,7 @@ yarn.lock
 .pydevproject
 .settings/
 jupyter_widget_hwt.egg-info
+js/package-lock.json
 
 # Compiled javascript
 jupyter-widget-hwt/static/
