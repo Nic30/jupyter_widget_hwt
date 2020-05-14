@@ -3,6 +3,9 @@ jupyter-widget-hwt
 
 A Jupyter witdgets for visualization of hwt based circuits.
 
+Example [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Nic30/jupyter-widget-hwt.git/master?filepath=examples%2Fexample_simple.ipynb)
+
+
 Installation
 ------------
 
