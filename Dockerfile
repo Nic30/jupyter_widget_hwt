@@ -22,7 +22,8 @@ COPY . ${HOME}
 USER root
 
 WORKDIR ${HOME}
-RUN python3 setup.py install
+RUN python3 setup.py install &&
+    jupyter nbextension enable --py --sys-prefix jupyter-widget-hwt
 
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
