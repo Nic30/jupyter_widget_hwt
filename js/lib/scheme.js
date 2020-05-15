@@ -27,13 +27,13 @@ var HwtSchemeModel = widgets.DOMWidgetModel.extend({
     defaults: _.extend(widgets.DOMWidgetModel.prototype.defaults(), {
         _model_name : 'HwtSchemeModel',
         _view_name : 'HwtSchemeView',
-        _model_module : 'jupyter-widget-hwt',
-        _view_module : 'jupyter-widget-hwt',
+        _model_module : 'jupyter_widget_hwt',
+        _view_module : 'jupyter_widget_hwt',
         _model_module_version : '0.0.1',
         _view_module_version : '0.0.1',
         value : {},
-        width : "400px",
-        height : "200px"
+        width : "800px",
+        height : "250px"
 
     })
 });

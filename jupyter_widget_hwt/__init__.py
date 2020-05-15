@@ -23,6 +23,6 @@ def _jupyter_nbextension_paths():
     return [{
         'section': 'notebook',
         'src': 'static',
-        'dest': 'jupyter-widget-hwt',
-        'require': 'jupyter-widget-hwt/extension'
+        'dest': 'jupyter_widget_hwt',
+        'require': 'jupyter_widget_hwt/extension'
     }]

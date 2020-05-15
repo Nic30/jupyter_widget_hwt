@@ -7,5 +7,5 @@ Package Install
 - [node](http://nodejs.org/)
 
 ```bash
-npm install --save jupyter-widget-hwt
+npm install --save jupyter_widget_hwt
 ```

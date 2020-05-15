@@ -111,9 +111,13 @@ class NPM(Command):
             log.info(
                 "Installing build dependencies with npm.  This may take a while...")
             npmName = self.get_npm_name()
-            check_call([npmName, 'install'], cwd=node_root,
+            check_call([npmName, 'install', '--debug'], cwd=node_root,
                        stdout=sys.stdout, stderr=sys.stderr)
             os.utime(self.node_modules, None)
+            log.info(
+                "running npm build")
+            check_call([npmName, 'run-script', 'build', '--debug'], cwd=node_root,
+                       stdout=sys.stdout, stderr=sys.stderr)
 
         for t in self.targets:
             if not os.path.exists(t):
@@ -131,17 +135,17 @@ with open(os.path.join(here, 'jupyter_widget_hwt', '_version.py')) as f:
     exec(f.read(), {}, version_ns)
 
 setup_args = {
-    'name': 'jupyter-widget-hwt',
+    'name': 'jupyter_widget_hwt',
     'version': version_ns['__version__'],
     'description': 'A Jupyter witdgets for visualization of hwt based circuits.',
     'long_description': LONG_DESCRIPTION,
     'include_package_data': True,
     'data_files': [
-        ('share/jupyter/nbextensions/jupyter-widget-hwt', [
+        ('share/jupyter/nbextensions/jupyter_widget_hwt', [
             'jupyter_widget_hwt/static/' + f
             for f in ['extension.js', 'index.js', 'index.js.map']
         ],),
-        ('etc/jupyter/nbconfig/notebook.d', ['jupyter-widget-hwt.json'])
+        ('etc/jupyter/nbconfig/notebook.d', ['jupyter_widget_hwt.json'])
     ],
     'install_requires': [
         'ipywidgets>=7.0.0',
@@ -158,7 +162,7 @@ setup_args = {
 
     'author': 'Michal Orsak',
     'author_email': 'michal.o.socials@gmail.com',
-    'url': 'https://github.com/Nic30/jupyter-widget-hwt',
+    'url': 'https://github.com/Nic30/jupyter_widget_hwt',
     'keywords': [
         'ipython',
         'jupyter',

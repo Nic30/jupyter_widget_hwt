@@ -1,12 +1,12 @@
 {
-  "name": "jupyter-widget-hwt",
+  "name": "jupyter_widget_hwt",
   "version": "0.0.1",
   "description": "A Jupyter witdgets for visualization of hwt based circuits.",
   "author": "Michal Orsak",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Nic30/jupyter-widget-hwt.git"
+    "url": "https://github.com/Nic30/jupyter_widget_hwt.git"
   },
   "keywords": [
     "jupyter",
@@ -30,10 +30,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "webpack": "^3.5.5",
+    "css-loader": "^3.5.3",
     "rimraf": "^2.6.1",
-	"style-loader": "^0.18.2",
-	"css-loader": "^0.28.4"
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   },
   "dependencies": {
     "@jupyter-widgets/base": "^3.0.0",

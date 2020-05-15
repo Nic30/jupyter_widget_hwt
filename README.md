@@ -1,9 +1,9 @@
-jupyter-widget-hwt
+jupyter_widget_hwt
 ===============================
 
 A Jupyter witdgets for visualization of hwt based circuits.
 
-Example [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Nic30/jupyter-widget-hwt.git/master?filepath=examples%2Fexample_simple.ipynb)
+Example [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Nic30/jupyter_widget_hwt.git/master?filepath=examples%2Fexample_simple.ipynb)
 
 
 Installation
@@ -11,22 +11,22 @@ Installation
 
 To install use pip:
 
-    $ pip install jupyter-widget-hwt
-    $ jupyter nbextension enable --py --sys-prefix jupyter-widget-hwt
+    $ pip install jupyter_widget_hwt
+    $ jupyter nbextension enable --py --sys-prefix jupyter_widget_hwt
 
 To install for jupyterlab
 
-    $ jupyter labextension install jupyter-widget-hwt
+    $ jupyter labextension install jupyter_widget_hwt
 
 For a development installation (requires npm),
 ```bash
 sudo jupyter labextension install @jupyter-widgets/jupyterlab-manager
 sudo pip3 install jupyterlab
-git clone https://github.com/Nic30/jupyter-widget-hwt.git
-cd jupyter-widget-hwt
+git clone https://github.com/Nic30/jupyter_widget_hwt.git
+cd jupyter_widget_hwt
 sudo pip3 install -e .
-sudo jupyter nbextension install --py --symlink --sys-prefix jupyter_widget_hwt
-sudo jupyter nbextension enable --py --sys-prefix jupyter_widget_hwt
+sudo jupyter nbextension install --py --symlink jupyter_widget_hwt
+sudo jupyter nbextension enable --py jupyter_widget_hwt
 sudo jupyter labextension install js --minimize=False --debug
 ```
 
@@ -47,3 +47,13 @@ export PYTHONPATH="$PYTHONPATH:$PWD/pyMathBitPrecise:$PWD/pyDigitalWaveTools:$PW
 $PWD/ipCorePackager:$PWD/pycocotb:$PWD/hwt:$PWD/hwtLib:$PWD/hwtGraph"
 ```
 before running jupyter.
+
+
+Running in Docker
+-----------------
+
+```bash
+sudo docker build --tag jupyter_widget_hwt .
+sudo docker run -p8888:8888 --name jupyter -it jupyter_widget_hwt jupyter notebook --ip 0.0.0.0 --port 8888
+sudo docker rm jupyter
+```

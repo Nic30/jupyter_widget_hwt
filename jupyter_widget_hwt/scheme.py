@@ -19,10 +19,10 @@ class HwtSchemeWidget(widgets.DOMWidget):
     _model_name = Unicode('HwtSchemeModel').tag(sync=True)
 
     # Name of the front-end module containing widget view
-    _view_module = Unicode('jupyter-widget-hwt').tag(sync=True)
+    _view_module = Unicode('jupyter_widget_hwt').tag(sync=True)
 
     # Name of the front-end module containing widget model
-    _model_module = Unicode('jupyter-widget-hwt').tag(sync=True)
+    _model_module = Unicode('jupyter_widget_hwt').tag(sync=True)
 
     # Version of the front-end module containing widget view
     _view_module_version = Unicode('^0.0.1').tag(sync=True)
@@ -35,8 +35,8 @@ class HwtSchemeWidget(widgets.DOMWidget):
     # It is synced back to Python from the frontend *any* time the model is
     # touched.
     value = Dict({}).tag(sync=True)
-    width = Unicode("400px").tag(sync=True)
-    height = Unicode("200px").tag(sync=True)
+    width = Unicode("800px").tag(sync=True)
+    height = Unicode("250px").tag(sync=True)
 
     def __init__(self, u, *args, **kwargs):
         try:
