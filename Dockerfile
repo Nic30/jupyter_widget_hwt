@@ -22,7 +22,7 @@ COPY . ${HOME}
 USER root
 
 WORKDIR ${HOME}
-RUN pip3 install ipywidgets jupyterlab widgetsnbextension jupyter_contrib_nbextensions
+RUN pip3 install ipywidgets
 RUN jupyter nbextension enable --py widgetsnbextension
 # RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
 # RUN pip3 install jupyter_contrib_nbextensions &&\
