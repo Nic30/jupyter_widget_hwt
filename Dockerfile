@@ -8,8 +8,8 @@ ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
 
 RUN apt update &&\
-    DEBIAN_FRONTEND="noninteractive" apt install python3 python3-pip npm git -y
-
+    DEBIAN_FRONTEND="noninteractive" apt install python3 python3-pip npm git xelatex -y 
+# xelatex for to pdf conversion
 RUN adduser --disabled-password \
     --gecos "Default user" \
     --uid ${NB_UID} \
