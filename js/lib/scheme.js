@@ -71,6 +71,8 @@ var HwtSchemeView = widgets.DOMWidgetView.extend({
            .on("dblclick.zoom", null)
 
         var graph = this.model.get('value');
+        // deepcopy
+        graph = JSON.parse(JSON.stringify(graph));
         g.bindData(graph);
     }
 });
