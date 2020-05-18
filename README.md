@@ -54,6 +54,6 @@ Running in Docker
 
 ```bash
 sudo docker build --tag jupyter_widget_hwt .
-sudo docker run -p8888:8888 --name jupyter -it jupyter_widget_hwt jupyter notebook --ip 0.0.0.0 --port 8888
-sudo docker rm jupyter
+sudo docker run -p8888:8888 --name jupyter_widget_hwt -it jupyter_widget_hwt jupyter notebook --ip 0.0.0.0 --port 8888
+sudo docker rm jupyter_widget_hwt
 ```
