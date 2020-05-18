@@ -20,8 +20,8 @@ To install for jupyterlab
 
 For a development installation (requires npm),
 ```bash
-sudo jupyter labextension install @jupyter-widgets/jupyterlab-manager
 sudo pip3 install jupyterlab
+sudo jupyter labextension install @jupyter-widgets/jupyterlab-manager
 git clone https://github.com/Nic30/jupyter_widget_hwt.git
 cd jupyter_widget_hwt
 sudo pip3 install -e .
