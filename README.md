@@ -9,7 +9,7 @@ Example [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2
 Installation
 ------------
 
-To install use pip:
+To install use pip (package not yet in PIP, you have to install manually, see dockerfile):
 
     $ pip install jupyter_widget_hwt
     $ jupyter nbextension enable --py --sys-prefix jupyter_widget_hwt
