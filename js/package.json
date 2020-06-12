@@ -39,7 +39,7 @@
   "dependencies": {
     "@jupyter-widgets/base": "^3.0.0",
     "lodash": "^4.17.4",
-    "d3-hwschematic": ">=0.1.0"
+    "d3-hwschematic": ">=0.1.1"
   },
   "jupyterlab": {
     "extension": "lib/labplugin"
