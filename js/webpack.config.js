@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 var path = require('path');
 var version = require('./package.json').version;
 
@@ -6,6 +7,16 @@ var version = require('./package.json').version;
 var rules = [
     { test: /\.css$/, use: ['style-loader', 'css-loader']}
 ]
+
+var plugins = [];
+plugins.push(
+    /**
+     * IgnorePlugin will skip any require
+     * that matches the following regex.
+     */
+    // optional imports
+    new webpack.IgnorePlugin(/webworker-threads/)
+);
 
 var static_dir = path.resolve(__dirname, '..', 'jupyter_widget_hwt', 'static');
 module.exports = [
@@ -22,7 +33,8 @@ module.exports = [
             filename: 'extension.js',
             path: static_dir,
             libraryTarget: 'amd'
-        }
+        },
+        plugins: plugins,
     },
     {// Bundle for the notebook containing the custom widget views and models
      //
@@ -40,7 +52,8 @@ module.exports = [
         module: {
             rules: rules
         },
-        externals: ['@jupyter-widgets/base']
+        externals: ['@jupyter-widgets/base'],
+        plugins: plugins,
     },
     {// Embeddable jupyter_widget_hwt bundle
      //
@@ -67,6 +80,7 @@ module.exports = [
         module: {
             rules: rules
         },
-        externals: ['@jupyter-widgets/base']
+        externals: ['@jupyter-widgets/base'],
+        plugins: plugins,
     }
 ];
