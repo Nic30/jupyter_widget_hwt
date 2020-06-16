@@ -9,7 +9,8 @@ cache:
 python:
   - '3.8'
  
-install:
+# install:
+script:
   - python setup.py install
 
 # script:
