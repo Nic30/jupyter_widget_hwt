@@ -20,14 +20,15 @@ To install for jupyterlab
 
 For a development installation (requires npm),
 ```bash
-sudo pip3 install jupyterlab
-sudo jupyter labextension install @jupyter-widgets/jupyterlab-manager
+pip3 install jupyterlab
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
 git clone https://github.com/Nic30/jupyter_widget_hwt.git
 cd jupyter_widget_hwt
 sudo pip3 install -e .
-sudo jupyter nbextension install --py --symlink jupyter_widget_hwt
-sudo jupyter nbextension enable --py jupyter_widget_hwt
-sudo jupyter labextension install js --minimize=False --debug
+# jupyter nbextension install --py --symlink jupyter_widget_hwt
+jupyter nbextension enable --py jupyter_widget_hwt
+# optionally
+# jupyter labextension install js --minimize=False --debug
 ```
 
 
@@ -43,8 +44,8 @@ Note on first `jupyter lab --watch`, you may need to touch a file to get Jupyter
 Optionally you can manually download a depndencies and libraries with examples add them to a PYTHONPATH
 if you do not want to install them.
 ```
-export PYTHONPATH="$PYTHONPATH:$PWD/pyMathBitPrecise:$PWD/pyDigitalWaveTools:$PWD/hdlConvertorAst:\
-$PWD/ipCorePackager:$PWD/pycocotb:$PWD/hwt:$PWD/hwtLib:$PWD/hwtGraph"
+export PYTHONPATH="$PYTHONPATH:$PWD/../pyMathBitPrecise:$PWD/../pyDigitalWaveTools:$PWD/../hdlConvertorAst:\
+$PWD/../ipCorePackager:$PWD/../pycocotb:$PWD/../hwt:$PWD/../hwtLib:$PWD/../hwtGraph"
 ```
 before running jupyter.
 
@@ -54,6 +55,13 @@ Running in Docker
 
 ```bash
 sudo docker build --tag jupyter_widget_hwt .
-sudo docker run -p8888:8888 --name jupyter_widget_hwt -it jupyter_widget_hwt jupyter notebook --ip 0.0.0.0 --port 8888
+# use -p to propagate jupyter ports, -u to run as current user, -v to share exampes, -w to set work dir
+sudo docker run -p8888:8888 \
+    -u $(id -u ${USER}):$(id -g ${USER}) \
+    -v ${PWD}/examples:/opt/jupyter_widget_hwt_examples \
+    -w /opt/jupyter_widget_hwt_examples \
+    --name jupyter_widget_hwt -it jupyter_widget_hwt\
+    jupyter notebook --ip 0.0.0.0 --port 8888
+
 sudo docker rm jupyter_widget_hwt
 ```
