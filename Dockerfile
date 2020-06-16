@@ -25,15 +25,18 @@ RUN apt update &&\
 
 RUN pip3 install ipywidgets
 RUN jupyter nbextension enable --py widgetsnbextension
-# RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
-# RUN pip3 install jupyter_contrib_nbextensions &&\
-#    jupyter nbextension install --py jupyter_widget_hwt &&
+
+# install fresh dependencies from git (not required)
+RUN git clone --depth=1 https://github.com/Nic30/hwtLib.git
+RUN git clone --depth=1 https://github.com/Nic30/hwtGraph.git
+RUN pip3 install --upgrade  -r hwtLib/docs/requirements.hwt.txt
+RUN pip3 install hwtGraph
+
+# install this library
 RUN pip3 install .
-#RUN jupyter labextension install js 
-#RUN python3 setup.py install &&\
-#    jupyter nbextension install --py jupyter_widget_hwt &&\
-#    jupyter nbextension enable  --py jupyter_widget_hwt
-RUN  pip3 install git+https://github.com/Nic30/hwtLib.git
+
+# install library with examples
+RUN pip3 install git+https://github.com/Nic30/hwtLib.git
 
 # [mybinder specific]
 RUN chown -R ${NB_UID} ${HOME}
