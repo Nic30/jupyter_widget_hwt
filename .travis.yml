@@ -1,0 +1,24 @@
+dist: focal
+language: python
+git:
+  depth: 1
+
+cache:
+  apt: true
+
+python:
+  - '3.8'
+ 
+install:
+  - python setup.py install
+
+# script:
+#   - coverage run --source=hwtLib setup.py test
+
+deploy:
+  provider: pypi
+  user: nic30
+  on:
+    tags: true
+    branch: master
+
