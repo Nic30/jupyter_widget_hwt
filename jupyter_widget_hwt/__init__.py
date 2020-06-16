@@ -1,6 +1,6 @@
 from ._version import version_info, __version__
 
-from .scheme import *
+from .scheme import HwtSchemeWidget
 
 
 def _jupyter_nbextension_paths():
