@@ -12,7 +12,8 @@ Installation
 
 To install use pip (package not yet in PIP, you have to install manually, see dockerfile):
 
-    $ pip install jupyter_widget_hwt
+    $ pip3 install jupyter_widget_hwt
+    $ # optionally check
     $ jupyter nbextension enable --py --sys-prefix jupyter_widget_hwt
 
 To install for jupyterlab
@@ -25,11 +26,14 @@ pip3 install jupyterlab
 jupyter labextension install @jupyter-widgets/jupyterlab-manager
 git clone https://github.com/Nic30/jupyter_widget_hwt.git
 cd jupyter_widget_hwt
-sudo pip3 install -e .
-# jupyter nbextension install --py --symlink jupyter_widget_hwt
-jupyter nbextension enable --py jupyter_widget_hwt
-# optionally
-# jupyter labextension install js --minimize=False --debug
+# python3 setup.py build
+pip3 install -e .
+# jupyter-nbextension install --py --symlink jupyter_widget_hwt --user
+jupyter-nbextension enable --py jupyter_widget_hwt
+# rebuild javascript
+jupyter-nbextension install js --minimize=False --debug --user
+# initialize this nbextension in the browser every time the notebook (or other app) loads
+jupyter-nbextension enable jupyter_widget_hwt --user
 ```
 
 
@@ -65,4 +69,11 @@ sudo docker run -p8888:8888 \
     jupyter notebook --ip 0.0.0.0 --port 8888
 
 sudo docker rm jupyter_widget_hwt
+```
+
+Potentially useful commands
+----------------------------
+```
+# complete reinstall of jupyter
+pip3 install --upgrade --force-reinstall --no-cache-dir jupyter
 ```
