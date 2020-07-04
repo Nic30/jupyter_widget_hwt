@@ -5,7 +5,7 @@ var d3 = require('d3');
 d3.HwSchematic = require('d3-hwschematic').HwSchematic;
 var _ = require('lodash');
 
-// See example.py for the kernel counterpart to this file.
+// See scheme.py for the kernel counterpart to this file.
 
 
 // Custom Model. Custom widgets models must at least provide default values
