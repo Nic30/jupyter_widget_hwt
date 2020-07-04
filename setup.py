@@ -20,9 +20,10 @@ npm_path = os.pathsep.join([
 
 log.set_verbosity(log.DEBUG)
 log.info('setup.py entered')
-log.info('$PATH=%s' % os.environ['PATH'])
+log.info('PATH=%s' % os.environ['PATH'])
 
-LONG_DESCRIPTION = 'A Jupyter witdgets for visualization of hwt based circuits.'
+with open(os.path.join(here, "README.md")) as f:
+    LONG_DESCRIPTION = f.read()
 
 
 def js_prerelease(command, strict=False):
@@ -62,11 +63,8 @@ def update_package_data(distribution):
 
 class NPM(Command):
     description = 'install package.json dependencies using npm'
-
     user_options = []
-
     node_modules = os.path.join(node_root, 'node_modules')
-
     targets = [
         os.path.join(here, 'jupyter_widget_hwt', 'static', f)
         for f in ['extension.js', 'index.js']
@@ -90,7 +88,7 @@ class NPM(Command):
         try:
             check_call([npmName, '--version'])
             return True
-        except:
+        except Exception:
             return False
 
     def should_run_npm_install(self):
@@ -137,7 +135,7 @@ with open(os.path.join(here, 'jupyter_widget_hwt', '_version.py')) as f:
 setup_args = {
     'name': 'jupyter_widget_hwt',
     'version': version_ns['__version__'],
-    'description': 'A Jupyter witdgets for visualization of hwt based circuits.',
+    'description': 'Jupyter widgets for visualization of hwt based circuits.',
     'long_description': LONG_DESCRIPTION,
     'include_package_data': True,
     'data_files': [
@@ -159,14 +157,13 @@ setup_args = {
         'sdist': js_prerelease(sdist, strict=True),
         'jsdeps': NPM,
     },
-
     'author': 'Michal Orsak',
     'author_email': 'michal.o.socials@gmail.com',
     'url': 'https://github.com/Nic30/jupyter_widget_hwt',
     'keywords': [
         'ipython',
         'jupyter',
-        'widgets',
+        'widget',
     ],
     'classifiers': [
         'Development Status :: 4 - Beta',
