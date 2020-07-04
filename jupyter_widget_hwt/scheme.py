@@ -48,7 +48,7 @@ class HwtSchemeWidget(widgets.DOMWidget):
 
         try:
             width = kwargs["width"]
-            if isinstance(height, int):
+            if isinstance(width, int):
                 kwargs["width"] = "%dpx" % width
         except KeyError:
             pass
