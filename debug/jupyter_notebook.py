@@ -7,10 +7,13 @@ from pathlib import Path
 import re
 import sys
 import tempfile
+import os
 
 
 # script used to execute jupyter notebook from other IDEs with support for debugger
 if __name__ == '__main__':
+    # in order to have all files in correct paths this script has to be executed in git root
+    os.chdir(os.path.join(os.path.dirname(__file__), ".."))
     # https://gist.github.com/bsdz/349a750eac042301e910bc9cec8cd65c
     ipython_code_cache = Path(tempfile.gettempdir()) / "ipython_cache"
     ipython_code_cache.mkdir(parents=True, exist_ok=True)
