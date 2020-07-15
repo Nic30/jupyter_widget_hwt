@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "@jupyter-widgets/base": "^3.0.0",
-    "lodash": "^4.17.4",
     "d3-hwschematic": ">=0.1.1",
     "d3-wave": ">=1.0.6",
     "webworker-threads": ">=0.7.17"
