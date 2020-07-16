@@ -39,8 +39,7 @@
   "dependencies": {
     "@jupyter-widgets/base": "^3.0.0",
     "d3-hwschematic": ">=0.1.1",
-    "d3-wave": ">=1.0.7",
-    "webworker-threads": ">=0.7.17"
+    "d3-wave": ">=1.0.7"
   },
   "jupyterlab": {
     "extension": "lib/labplugin"
