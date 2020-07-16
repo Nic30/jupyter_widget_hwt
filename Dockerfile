@@ -26,11 +26,11 @@ RUN apt update &&\
 RUN pip3 install ipywidgets
 RUN jupyter nbextension enable --py widgetsnbextension
 
-# install fresh dependencies from git (not required)
+# install fresh dependencies from git (not required, there are pip packages)
 RUN git clone --depth=1 https://github.com/Nic30/hwtLib.git
-RUN git clone --depth=1 https://github.com/Nic30/hwtGraph.git
-RUN pip3 install --upgrade  -r hwtLib/docs/requirements.hwt.txt
-RUN pip3 install hwtGraph
+RUN pip3 install -r hwtLib/docs/requirements.hwt.txt
+RUN pip3 install git+git://github.com/Nic30/hwtLib.git@master#egg=hwtLib
+RUN pip3 installl git+git://github.com/Nic30/hwtGraph@master#egg=hwtGraph
 
 # install this library
 RUN pip3 install .
