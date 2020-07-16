@@ -1,5 +1,5 @@
 dist: focal
-language: node_js
+language: python
 git:
   depth: 1
 
@@ -8,10 +8,12 @@ cache:
 
 python:
   - '3.8'
-node_js:
-  - node
-
-# install:
+ 
+install:
+  - nvm install node
+  - node --version
+  - npm --version
+  - nvm --version
 script:
   - python setup.py install
 
