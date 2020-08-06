@@ -147,7 +147,7 @@ setup_args = {
     ],
     'install_requires': [
         'ipywidgets>=7.0.0',
-        'hwtGraph>=1.5',
+        'hwtGraph>=1.6',
     ],
     'packages': find_packages(),
     'zip_safe': False,
