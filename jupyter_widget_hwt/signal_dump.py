@@ -79,8 +79,10 @@ class HwtSignalDumpWidget(widgets.DOMWidget):
             if res.errors or res.failures:
                 stderr.write(str(res))
                 stderr.write(out_log.getvalue())
-            else:
-                self.value = signal_data
+        except Exception:
+            # we are printing the error message but we still want to see the simulation output
+            pass
         finally:
             unittest_test.__class__.DEFAULT_SIMULATOR = orig_sim
             unittest_test.runSim = orig_runSim
+        self.value = signal_data
