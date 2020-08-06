@@ -1,5 +1,4 @@
 var widgets = require('@jupyter-widgets/base');
-var signal_dump_css = require('./signal_dump.css');
 
 var d3 = require('d3');
 var d3_wave = require('d3-wave');
