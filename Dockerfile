@@ -14,6 +14,11 @@ ENV HOME /home/${NB_USER}
 #    --uid ${NB_UID} \
 #    ${NB_USER}
 
+# debug print versions
+RUN python3 --version
+RUN jupyter --version
+RUN node --version
+
 # [mybinder specific]
 # Make sure the contents of our repo are in ${HOME}
 COPY . ${HOME}
