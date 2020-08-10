@@ -135,13 +135,13 @@ with open(os.path.join(here, 'jupyter_widget_hwt', '_version.py')) as f:
 setup_args = {
     'name': 'jupyter_widget_hwt',
     'version': version_ns['__version__'],
-    'description': 'Jupyter widgets for visualization of hwt based circuits.',
+    'description': 'Jupyter widgets for visualization of hwt based circuits and simulations.',
     'long_description': LONG_DESCRIPTION,
     'include_package_data': True,
     'data_files': [
         ('share/jupyter/nbextensions/jupyter_widget_hwt', [
             'jupyter_widget_hwt/static/' + f
-            for f in ['extension.js', 'index.js', 'index.js.map']
+            for f in ['extension.js', 'index.js', 'index.js.map', 'jupyter_widget_hwt.yaml']
         ],),
         ('etc/jupyter/nbconfig/notebook.d', ['jupyter_widget_hwt.json'])
     ],
@@ -172,7 +172,6 @@ setup_args = {
         'Intended Audience :: Science/Research',
         'Topic :: Multimedia :: Graphics',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
