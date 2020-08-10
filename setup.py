@@ -141,7 +141,8 @@ setup_args = {
     'data_files': [
         ('share/jupyter/nbextensions/jupyter_widget_hwt', [
             'jupyter_widget_hwt/static/' + f
-            for f in ['extension.js', 'index.js', 'index.js.map', 'jupyter_widget_hwt.yaml']
+            for f in ['extension.js', 'index.js', 'index.js.map',
+                      'jupyter_widget_hwt.yaml']
         ],),
         ('etc/jupyter/nbconfig/notebook.d', ['jupyter_widget_hwt.json'])
     ],
