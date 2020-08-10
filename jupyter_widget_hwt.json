@@ -1,5 +1,6 @@
 {
   "load_extensions": {
-    "jupyter_widget_hwt/extension": true
+    "jupyter_widget_hwt/extension": true,
+    "jupyter-js-widgets/extension": true
   }
 }
