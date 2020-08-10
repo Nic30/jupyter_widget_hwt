@@ -1,21 +1,23 @@
-*.egg-info/
-.ipynb_checkpoints/
 dist/
 build/
+*.egg-info/
+.ipynb_checkpoints/
 *.py[cod]
 node_modules/
 yarn.lock
+js/package-lock.json
+
+# eclipse project
 .project
 .pydevproject
 .settings/
 jupyter_widget_hwt.egg-info
-js/package-lock.json
 .externalToolBuilders/
+
 # Compiled javascript
 jupyter_widget_hwt/static/extension.js
 jupyter_widget_hwt/static/index.js
 jupyter_widget_hwt/static/index.js.map
-
 
 # OS X
 .DS_Store
