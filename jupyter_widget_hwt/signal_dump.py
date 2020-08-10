@@ -34,7 +34,7 @@ class HwtSignalDumpWidget(widgets.DOMWidget):
     # is automatically synced to the frontend *any* time it changes in Python.
     # It is synced back to Python from the frontend *any* time the model is
     # touched.
-    value = Dict({}).tag(sync=True)
+    signal_data = Dict({}).tag(sync=True)
     width = Unicode("800").tag(sync=True)
     height = Unicode("250").tag(sync=True)
 
@@ -85,4 +85,4 @@ class HwtSignalDumpWidget(widgets.DOMWidget):
         finally:
             unittest_test.__class__.DEFAULT_SIMULATOR = orig_sim
             unittest_test.runSim = orig_runSim
-        self.value = signal_data
+        self.signal_data = signal_data
