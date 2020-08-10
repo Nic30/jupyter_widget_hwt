@@ -14,7 +14,10 @@ To install use pip (package not yet in PIP, you have to install manually, see do
 
     $ pip3 install jupyter_widget_hwt
     $ # optionally check
-    $ jupyter nbextension enable --py --sys-prefix jupyter_widget_hwt
+    $ # jupyter nbextension enable --py widgetsnbextension
+    $ jupyter nbextension enable --py jupyter_widget_hwt
+    $ # optionally you can also enable extension manager
+    $ jupyter nbextensions_configurator enable --user
 
 To install for jupyterlab
 
@@ -24,18 +27,23 @@ For a development installation (requires npm),
 ```bash
 pip3 install jupyterlab
 jupyter labextension install @jupyter-widgets/jupyterlab-manager
+jupyter contrib nbextension install --user --symlink
 git clone https://github.com/Nic30/jupyter_widget_hwt.git
 cd jupyter_widget_hwt
 # python3 setup.py build
-pip3 install -e .
+pip3 install --upgrade --force-reinstall --no-cache-dir -e .
 # jupyter-nbextension install --py --symlink jupyter_widget_hwt --user
-jupyter-nbextension enable --py jupyter_widget_hwt
+jupyter nbextension enable jupyter_widget_hwt --user --py
 # rebuild javascript
 jupyter-nbextension install js --minimize=False --debug --user
 # initialize this nbextension in the browser every time the notebook (or other app) loads
 jupyter-nbextension enable jupyter_widget_hwt --user
 ```
 
+Uninstall with all dependencies
+```bash
+pip3 uninstall -y hdlConvertorAst hwt hwtGraph ipCorePackager jupyter-widget-hwt pyDigitalWaveTools pyMathBitPrecise pycocotb
+```
 
 When actively developing your extension, build Jupyter Lab with the command:
 
@@ -75,5 +83,6 @@ Potentially useful commands
 ----------------------------
 ```
 # complete reinstall of jupyter
-pip3 install --upgrade --force-reinstall --no-cache-dir jupyter
+rm -r ~/.jupyter
+pip3 install --upgrade --force-reinstall --no-cache-dir jupyter ipywidgets
 ```
