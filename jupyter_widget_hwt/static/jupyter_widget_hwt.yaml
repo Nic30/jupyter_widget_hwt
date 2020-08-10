@@ -1,0 +1,4 @@
+Type: IPython Notebook Extension
+Name: jupyter_widget_hwt/extension
+Main: index.js
+Compatibility: 4.x, 5.x

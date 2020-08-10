@@ -10,7 +10,6 @@ yarn.lock
 .settings/
 jupyter_widget_hwt.egg-info
 js/package-lock.json
-jupyter_widget_hwt/static/
 .externalToolBuilders/
 # Compiled javascript
 jupyter_widget_hwt/static/extension.js
