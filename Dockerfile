@@ -8,7 +8,7 @@ ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
-## xelatex for to pdf conversion
+
 #RUN adduser --disabled-password \
 #    --gecos "Default user" \
 #    --uid ${NB_UID} \
@@ -21,6 +21,7 @@ RUN node --version
 
 # [mybinder specific]
 # Make sure the contents of our repo are in ${HOME}
+USER ${NB_USER}
 COPY . ${HOME}
 #USER root
 WORKDIR ${HOME}
@@ -45,4 +46,4 @@ RUN pip3 install git+https://github.com/Nic30/hwtLib.git
 
 # [mybinder specific]
 #RUN chown -R ${NB_UID} ${HOME}
-#USER ${NB_USER}
+USER ${NB_USER}
