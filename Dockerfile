@@ -1,5 +1,5 @@
 # note that this Dockerfile is meant for notebooks and you can install this package directly
-FROM ubuntu:20.04
+FROM jupyter/minimal-notebook
 
 # [mybinder specific]
 # https://github.com/binder-examples/minimal-dockerfile
@@ -8,11 +8,11 @@ ARG NB_UID=1000
 ENV USER ${NB_USER}
 ENV NB_UID ${NB_UID}
 ENV HOME /home/${NB_USER}
-# xelatex for to pdf conversion
-RUN adduser --disabled-password \
-    --gecos "Default user" \
-    --uid ${NB_UID} \
-    ${NB_USER}
+## xelatex for to pdf conversion
+#RUN adduser --disabled-password \
+#    --gecos "Default user" \
+#    --uid ${NB_UID} \
+#    ${NB_USER}
 
 # [mybinder specific]
 # Make sure the contents of our repo are in ${HOME}
@@ -20,8 +20,8 @@ COPY . ${HOME}
 USER root
 WORKDIR ${HOME}
 
-RUN apt update &&\
-    DEBIAN_FRONTEND="noninteractive" apt install python3 python3-pip npm git -y 
+#RUN apt update && \
+#	DEBIAN_FRONTEND="noninteractive" apt install python3 python3-pip npm git -y 
 
 RUN pip3 install ipywidgets
 RUN jupyter nbextension enable --py widgetsnbextension
