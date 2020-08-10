@@ -13,7 +13,9 @@ js/package-lock.json
 jupyter_widget_hwt/static/
 .externalToolBuilders/
 # Compiled javascript
-jupyter_widget_hwt/static/
+jupyter_widget_hwt/static/extension.js
+jupyter_widget_hwt/static/index.js
+jupyter_widget_hwt/static/index.js.map
 
 
 # OS X
