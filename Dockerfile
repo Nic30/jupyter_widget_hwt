@@ -17,7 +17,7 @@ ENV HOME /home/${NB_USER}
 # [mybinder specific]
 # Make sure the contents of our repo are in ${HOME}
 COPY . ${HOME}
-USER root
+#USER root
 WORKDIR ${HOME}
 
 #RUN apt update && \
@@ -39,5 +39,5 @@ RUN pip3 install .
 RUN pip3 install git+https://github.com/Nic30/hwtLib.git
 
 # [mybinder specific]
-RUN chown -R ${NB_UID} ${HOME}
-USER ${NB_USER}
+#RUN chown -R ${NB_UID} ${HOME}
+#USER ${NB_USER}
