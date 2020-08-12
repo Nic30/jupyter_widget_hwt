@@ -46,4 +46,5 @@ RUN pip3 install git+https://github.com/Nic30/hwtLib.git
 
 # [mybinder specific]
 #RUN chown -R ${NB_UID} ${HOME}
-USER ${NB_USER}
+#USER ${NB_USER}
+RUN jupyter trust examples/*.ipynb
