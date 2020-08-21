@@ -86,3 +86,6 @@ Potentially useful commands
 rm -r ~/.jupyter
 pip3 install --upgrade --force-reinstall --no-cache-dir jupyter ipywidgets
 ```
+
+
+This jupyter widget was build using [widget-cookiecutter](https://github.com/jupyter-widgets/widget-cookiecutter)
