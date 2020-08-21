@@ -8,15 +8,15 @@ var rules = [
     { test: /\.css$/, use: ['style-loader', 'css-loader']}
 ]
 
-var plugins = [];
-plugins.push(
+var plugins = [
     /**
      * IgnorePlugin will skip any require
      * that matches the following regex.
      */
     // optional imports
-    new webpack.IgnorePlugin(/webworker-threads/)
-);
+    new webpack.IgnorePlugin(/webworker-threads/),
+    new webpack.IgnorePlugin(/web-worker/),
+];
 
 var static_dir = path.resolve(__dirname, '..', 'jupyter_widget_hwt', 'static');
 module.exports = [
