@@ -1,5 +1,5 @@
 var widgets = require('@jupyter-widgets/base');
-var scheme_css = require('./scheme.css');
+var scheme_css = require('d3-hwschematic/dist/d3-hwschematic.css');
 
 var d3 = require('d3');
 d3.HwSchematic = require('d3-hwschematic').HwSchematic;
