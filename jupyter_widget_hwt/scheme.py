@@ -3,9 +3,14 @@ from traitlets import Unicode, Dict, Int
 from hwt.synthesizer.utils import synthesised
 from hwtGraph.elk.containers.idStore import ElkIdStore
 from hwtGraph.elk.fromHwt.convertor import UnitToLNode
-from hwtGraph.elk.fromHwt.defauts import DEFAULT_PLATFORM,\
+from hwtGraph.elk.fromHwt.defauts import DEFAULT_PLATFORM, \
     DEFAULT_LAYOUT_OPTIMIZATIONS
 import ipywidgets as widgets
+from hwt.synthesizer.rtlLevel.rtlSignal import RtlSignal
+from hwt.hdl.operator import Operator
+from hwt.synthesizer.unit import Unit
+from hwt.hdl.portItem import HdlPortItem
+from hwt.synthesizer.interface import Interface
 
 
 # See js/lib/scheme.js for the frontend counterpart to this file.
@@ -53,9 +58,70 @@ class HwtSchemeWidget(widgets.DOMWidget):
         except KeyError:
             pass
         super(HwtSchemeWidget, self).__init__(*args, **kwargs)
+
+        self.u = u
+        self.graph = None
+        self.json_idStore = None
+        self.hwt_obj_to_j_obj_ids = None
+        self.id_to_j_obj = None
         if u is not None:
-            synthesised(u, DEFAULT_PLATFORM)
-            g = UnitToLNode(u, optimizations=DEFAULT_LAYOUT_OPTIMIZATIONS)
-            idStore = ElkIdStore()
-            data = g.toElkJson(idStore)
-            self.value = data
+            self._bind_unit(u)
+
+    
+    def _bind_unit(self, u: Unit):
+        synthesised(u, DEFAULT_PLATFORM)
+        self.graph = UnitToLNode(u, optimizations=DEFAULT_LAYOUT_OPTIMIZATIONS)
+        self.json_idStore = ElkIdStore()
+        self.value = self.graph.toElkJson(self.json_idStore)
+    
+    def _init_hwt_obj_to_json_mapping_dicts(self):
+        # 1:1
+        id_to_j_obj = {}
+
+        def walk_json(obj):
+            _id = obj.get("id", None)
+            if _id is not None:
+                id_to_j_obj[_id] = obj
+
+            for prop in ("ports", "children", "edges"):
+                obj_list = obj.get(prop, None)
+                if obj_list:
+                    for o in obj_list:
+                        walk_json(o)
+
+        walk_json(self.value)
+
+        # N:M
+        hwt_obj_to_j_obj_ids = {}
+        for l_obj, j_id in self.json_idStore.items():
+            _hwt_obj = l_obj.originObj
+            if isinstance(_hwt_obj , (Unit, RtlSignal, Operator)):
+                hwt_obj_to_j_obj_ids.setdefault(_hwt_obj, set()).add(j_id)
+            elif isinstance(_hwt_obj, HdlPortItem):
+                if _hwt_obj.src is not None:
+                    hwt_obj_to_j_obj_ids.setdefault(_hwt_obj.src, set()).add(j_id)
+
+                if _hwt_obj.dst is not None:
+                    hwt_obj_to_j_obj_ids.setdefault(_hwt_obj.dst, set()).add(j_id)
+            else:
+                raise NotImplementedError(_hwt_obj)
+        self.hwt_obj_to_j_obj_ids = hwt_obj_to_j_obj_ids
+        self.id_to_j_obj = id_to_j_obj
+
+    def set_style_for_hwt_obj(self, hwt_obj, style_str:str):
+        if self.hwt_obj_to_j_obj_ids is None:
+            self._init_hwt_obj_to_json_mapping_dicts()
+
+        if isinstance(hwt_obj, Interface):
+            hwt_obj = hwt_obj._sigInside
+
+        j_ids = self.hwt_obj_to_j_obj_ids[hwt_obj]
+        for j_id in j_ids:
+            j_obj = self.id_to_j_obj[str(j_id)]
+            j_obj["hwMeta"]["cssStyle"] = style_str
+        
+        v = self.value
+        #v._notify_trait("value", v, v)
+        self.value = {}
+        self.value = v
+
