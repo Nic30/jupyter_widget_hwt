@@ -20,3 +20,9 @@ git clean -fdx
 npm install
 npm publish
 ```
+
+# Simple examples of jupyter widget
+
+* [jupyter-widget-d3-slider](https://gitlab.com/oscar6echo/jupyter-widget-d3-slider/)
+* [jupyter-drawing-pad](https://github.com/ocoudray/jupyter-drawing-pad)
+* [ipypivot](https://github.com/PierreMarion23/ipypivot)
