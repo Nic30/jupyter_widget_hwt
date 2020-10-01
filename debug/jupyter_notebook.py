@@ -11,6 +11,8 @@ import os
 
 
 # script used to execute jupyter notebook from other IDEs with support for debugger
+# [note] if debugger is stoped on some breakpoint the debug console works
+#        just the output is redirected to notebook and it can be viewed there
 if __name__ == '__main__':
     # in order to have all files in correct paths this script has to be executed in git root
     os.chdir(os.path.join(os.path.dirname(__file__), ".."))
