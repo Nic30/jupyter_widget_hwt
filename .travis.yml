@@ -14,8 +14,14 @@ install:
   - node --version
   - npm --version
   - nvm --version
-script:
+  - git clone https://github.com/Nic30/hwtLib
+  - pip3 install -r hwtLib/docs/requirements.hwt.txt --upgrade --force-reinstall
+  - pip3 install ./hwtLib
   - python setup.py install
+
+script:
+   
+
   - python setup.py test 
 
 # script:
