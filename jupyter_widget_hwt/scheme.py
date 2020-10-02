@@ -1,16 +1,34 @@
-from traitlets import Unicode, Dict, Int
+from traitlets import Unicode, Dict
+from typing import Union
 
+from hwt.hdl.operator import Operator
+from hwt.hdl.portItem import HdlPortItem
+from hwt.hdl.statement import HdlStatement
+from hwt.hdl.value import HValue
+from hwt.synthesizer.componentPath import ComponentPath
+from hwt.synthesizer.interface import Interface
+from hwt.synthesizer.rtlLevel.rtlSignal import RtlSignal
+from hwt.synthesizer.unit import Unit
 from hwt.synthesizer.utils import synthesised
 from hwtGraph.elk.containers.idStore import ElkIdStore
 from hwtGraph.elk.fromHwt.convertor import UnitToLNode
 from hwtGraph.elk.fromHwt.defauts import DEFAULT_PLATFORM, \
     DEFAULT_LAYOUT_OPTIMIZATIONS
 import ipywidgets as widgets
-from hwt.synthesizer.rtlLevel.rtlSignal import RtlSignal
-from hwt.hdl.operator import Operator
-from hwt.synthesizer.unit import Unit
-from hwt.hdl.portItem import HdlPortItem
-from hwt.synthesizer.interface import Interface
+from hwtGraph.elk.fromHwt.extractSplits import InterfaceSplitInfo
+
+
+class UpdateAccumulator():
+
+    def __init__(self, scheme):
+        self.scheme = scheme
+
+    def __enter__(self):
+        self.scheme._update_accumulator = self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.scheme._update_accumulator = None
+        self.scheme._trigger_update()
 
 
 # See js/lib/scheme.js for the frontend counterpart to this file.
@@ -64,9 +82,9 @@ class HwtSchemeWidget(widgets.DOMWidget):
         self.json_idStore = None
         self.hwt_obj_to_j_obj_ids = None
         self.id_to_j_obj = None
+        self._update_accumulator = None
         if u is not None:
             self._bind_unit(u)
-
     
     def _bind_unit(self, u: Unit):
         synthesised(u, DEFAULT_PLATFORM)
@@ -83,7 +101,7 @@ class HwtSchemeWidget(widgets.DOMWidget):
             if _id is not None:
                 id_to_j_obj[_id] = obj
 
-            for prop in ("ports", "children", "edges"):
+            for prop in ("ports", "children", "edges", "_children", "_edges"):
                 obj_list = obj.get(prop, None)
                 if obj_list:
                     for o in obj_list:
@@ -93,22 +111,56 @@ class HwtSchemeWidget(widgets.DOMWidget):
 
         # N:M
         hwt_obj_to_j_obj_ids = {}
-        for l_obj, j_id in self.json_idStore.items():
-            _hwt_obj = l_obj.originObj
-            if isinstance(_hwt_obj , (Unit, RtlSignal, Operator)):
-                hwt_obj_to_j_obj_ids.setdefault(_hwt_obj, set()).add(j_id)
+
+        def collect_port_signal(key, port_signal, j_id):
+            if isinstance(key, ComponentPath):
+                port_signal = ComponentPath(*key[:-1], port_signal)
+
+            hwt_obj_to_j_obj_ids.setdefault(port_signal, set()).add(j_id)
+            
+        def collect_l_obj(j_id, key, _hwt_obj):
+            if _hwt_obj is None or isinstance(_hwt_obj, (HValue, HdlStatement)):
+                return
+
+            if isinstance(_hwt_obj , (Unit, Interface, RtlSignal, Operator)):
+                hwt_obj_to_j_obj_ids.setdefault(key, set()).add(j_id)
+
             elif isinstance(_hwt_obj, HdlPortItem):
                 if _hwt_obj.src is not None:
-                    hwt_obj_to_j_obj_ids.setdefault(_hwt_obj.src, set()).add(j_id)
+                    collect_port_signal(key, _hwt_obj.src, j_id)
 
                 if _hwt_obj.dst is not None:
-                    hwt_obj_to_j_obj_ids.setdefault(_hwt_obj.dst, set()).add(j_id)
+                    collect_port_signal(key, _hwt_obj.dst, j_id)
             else:
-                raise NotImplementedError(_hwt_obj)
+                print("Can not find in json", key)
+                # raise NotImplementedError(key, _hwt_obj)
+        
+        # need_to_convert_component_paths = False
+        for l_obj, j_id in self.json_idStore.items():
+            if isinstance(l_obj, ComponentPath):
+                # need_to_convert_component_paths = True
+                key = ComponentPath(*(o.originObj for o in l_obj))
+                _hwt_obj = key[-1]
+                if type(_hwt_obj) is tuple or type(_hwt_obj) is InterfaceSplitInfo:
+                    key_prefix = key[:-1]
+                    for _hwt_obj0 in _hwt_obj:
+                        collect_l_obj(j_id, key_prefix / _hwt_obj0, _hwt_obj0)
+                else:
+                    collect_l_obj(j_id, key, _hwt_obj)
+                
+            else:
+                _hwt_obj = l_obj.originObj
+                if type(_hwt_obj) is tuple:
+                    for _hwt_obj0 in _hwt_obj:
+                        collect_l_obj(j_id, key, _hwt_obj0)
+                else:
+                    key = _hwt_obj
+                    collect_l_obj(j_id, key, _hwt_obj)
+
         self.hwt_obj_to_j_obj_ids = hwt_obj_to_j_obj_ids
         self.id_to_j_obj = id_to_j_obj
 
-    def set_style_for_hwt_obj(self, hwt_obj, style_str:str):
+    def set_style(self, hwt_obj: Union[RtlSignal, Interface, Unit, ComponentPath, Operator, HdlStatement], style_str:str):
         if self.hwt_obj_to_j_obj_ids is None:
             self._init_hwt_obj_to_json_mapping_dicts()
 
@@ -120,8 +172,11 @@ class HwtSchemeWidget(widgets.DOMWidget):
             j_obj = self.id_to_j_obj[str(j_id)]
             j_obj["hwMeta"]["cssStyle"] = style_str
         
+        if not self._update_accumulator:
+            self._trigger_update()
+
+    def _trigger_update(self):
         v = self.value
-        #v._notify_trait("value", v, v)
+        # v._notify_trait("value", v, v)
         self.value = {}
         self.value = v
-
