@@ -16,6 +16,7 @@ install:
   - nvm --version
 script:
   - python setup.py install
+  - python setup.py test 
 
 # script:
 #   - coverage run --source=hwtLib setup.py test

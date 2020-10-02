@@ -132,13 +132,13 @@ version_ns = {}
 with open(os.path.join(here, 'jupyter_widget_hwt', '_version.py')) as f:
     exec(f.read(), {}, version_ns)
 
-setup_args = {
-    'name': 'jupyter_widget_hwt',
-    'version': version_ns['__version__'],
-    'description': 'Jupyter widgets for visualization of hwt based circuits and simulations.',
-    'long_description': LONG_DESCRIPTION,
-    'include_package_data': True,
-    'data_files': [
+setup(
+    name='jupyter_widget_hwt',
+    version=version_ns['__version__'],
+    description='Jupyter widgets for visualization of hwt based circuits and simulations.',
+    long_description=LONG_DESCRIPTION,
+    include_package_data=True,
+    data_files=[
         ('share/jupyter/nbextensions/jupyter_widget_hwt', [
             'jupyter_widget_hwt/static/' + f
             for f in ['extension.js', 'index.js', 'index.js.map',
@@ -146,27 +146,28 @@ setup_args = {
         ],),
         ('etc/jupyter/nbconfig/notebook.d', ['jupyter_widget_hwt.json'])
     ],
-    'install_requires': [
+    install_requires=[
         'ipywidgets>=7.0.0',
         'hwtGraph>=1.6',
     ],
-    'packages': find_packages(),
-    'zip_safe': False,
-    'cmdclass': {
+    tests_require = ["pytest", "pebble", ],
+    packages=find_packages(),
+    zip_safe=False,
+    cmdclass={
         'build_py': js_prerelease(build_py),
         'egg_info': js_prerelease(egg_info),
         'sdist': js_prerelease(sdist, strict=True),
         'jsdeps': NPM,
     },
-    'author': 'Michal Orsak',
-    'author_email': 'michal.o.socials@gmail.com',
-    'url': 'https://github.com/Nic30/jupyter_widget_hwt',
-    'keywords': [
+    author='Michal Orsak',
+    author_email='michal.o.socials@gmail.com',
+    url='https://github.com/Nic30/jupyter_widget_hwt',
+    keywords=[
         'ipython',
         'jupyter',
         'widget',
     ],
-    'classifiers': [
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: IPython',
         'Intended Audience :: Developers',
@@ -175,7 +176,5 @@ setup_args = {
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
-    ],
-}
-
-setup(**setup_args)
+    ]
+)
