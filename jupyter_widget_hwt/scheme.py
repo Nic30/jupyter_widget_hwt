@@ -176,6 +176,9 @@ class HwtSchemeWidget(widgets.DOMWidget):
         if isinstance(hwt_obj, Interface):
             hwt_obj = hwt_obj._sigInside
 
+        if not isinstance(hwt_obj, ComponentPath):
+            hwt_obj = ComponentPath(hwt_obj)
+
         j_ids = self.hwt_obj_to_j_obj_ids[hwt_obj]
         for j_id in j_ids:
             j_obj = self.id_to_j_obj[str(j_id)]
