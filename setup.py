@@ -154,6 +154,7 @@ setup(
         "pytest", "pebble", # test deps of nbconvert
         "nbconvert"
     ],
+    test_suite="tests",
     packages=find_packages(),
     zip_safe=False,
     cmdclass={
