@@ -4,7 +4,7 @@ jupyter_widget_hwt [![Build Status](https://travis-ci.org/Nic30/jupyter_widget_h
 
 A Jupyter witdgets for visualization of hwt based circuits.
 
-Example [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Nic30/jupyter_widget_hwt.git/master?filepath=examples%2Fexample_scheme.ipynb)
+Example [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Nic30/jupyter_widget_hwt.git/master?filepath=examples%2Findex.ipynb)
 
 
 Installation
