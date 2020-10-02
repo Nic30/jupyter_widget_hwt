@@ -150,7 +150,10 @@ setup(
         'ipywidgets>=7.0.0',
         'hwtGraph>=1.6',
     ],
-    tests_require = ["pytest", "pebble", ],
+    tests_require=[
+        "pytest", "pebble", # test deps of nbconvert
+        "nbconvert"
+    ],
     packages=find_packages(),
     zip_safe=False,
     cmdclass={
