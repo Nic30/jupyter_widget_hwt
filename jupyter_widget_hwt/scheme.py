@@ -160,7 +160,16 @@ class HwtSchemeWidget(widgets.DOMWidget):
         self.hwt_obj_to_j_obj_ids = hwt_obj_to_j_obj_ids
         self.id_to_j_obj = id_to_j_obj
 
-    def set_style(self, hwt_obj: Union[RtlSignal, Interface, Unit, ComponentPath, Operator, HdlStatement], style_str:str):
+    def set_css_style(self, hwt_obj: Union[RtlSignal, Interface, Unit, ComponentPath, Operator, HdlStatement], style_str:str):
+        """
+        :note: If you doing a large update use :class:`UpdateAccumulator`
+        .. code-block:: python
+
+            with UpdateAccumulator(scheme):
+                scheme.set_css_style(x, "fill:red")
+                scheme.set_css_style(y, "fill:blue")
+
+        """
         if self.hwt_obj_to_j_obj_ids is None:
             self._init_hwt_obj_to_json_mapping_dicts()
 
