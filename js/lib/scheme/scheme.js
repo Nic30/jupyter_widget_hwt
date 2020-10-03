@@ -61,8 +61,8 @@ var HwtSchemeView = widgets.DOMWidgetView.extend({
 
         var g = new d3.HwSchematic(svg);
         var zoom = d3.zoom();
-        zoom.on("zoom", function applyTransform() {
-            g.root.attr("transform", d3.event.transform)
+        zoom.on("zoom", function applyTransform(ev) {
+            g.root.attr("transform", ev.transform)
         });
         
         // disable zoom on doubleclick 
