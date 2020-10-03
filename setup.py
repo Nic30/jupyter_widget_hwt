@@ -147,7 +147,7 @@ setup(
         ('etc/jupyter/nbconfig/notebook.d', ['jupyter_widget_hwt.json'])
     ],
     install_requires=[
-        'ipywidgets>=7.0.0',
+        'ipywidgets>=7.5.1',
         'hwtGraph>=1.9',
     ],
     tests_require=[
