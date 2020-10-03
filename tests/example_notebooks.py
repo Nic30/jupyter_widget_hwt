@@ -1,11 +1,15 @@
 import os
 import unittest
 
+from nbclient.tests.test_client import run_notebook, assert_notebooks_equal
 from nbconvert.exporters.exporter import ResourcesDict
-from nbconvert.preprocessors.tests.test_execute import assert_notebooks_equal, \
-    run_notebook
 
 
+#def run_notebook(fname):
+#    with open(fname) as f:
+#        input_nb = nbformat.read(f, 4)
+#        with pytest.warns(FutureWarning):
+#            output_nb = executenb(deepcopy(input_nb))
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 
 

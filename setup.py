@@ -152,7 +152,7 @@ setup(
     ],
     tests_require=[
         "pytest", "pebble", # test deps of nbconvert
-        "nbconvert"
+        "nbconvert>=6.0.7"
     ],
     test_suite="tests",
     packages=find_packages(),
