@@ -151,7 +151,7 @@ setup(
         'hwtGraph>=1.9',
     ],
     tests_require=[
-        "pytest", "pebble", # test deps of nbconvert
+        "pytest", "pebble", "xmltodict", # test deps of nbconvert
         "nbconvert>=6.0.7"
     ],
     test_suite="tests",
