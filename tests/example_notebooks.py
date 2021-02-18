@@ -33,7 +33,7 @@ class ExampleNotebooksTC(unittest.TestCase):
         expected_cells = expected['cells']
         actual_cells = actual['cells']
         self.assertEqual(len(expected_cells), len(actual_cells))
-    
+
         for expected_cell, actual_cell in zip(expected_cells, actual_cells):
             # Uncomment these to help debug test failures better
             expected_outputs = expected_cell.get('outputs', [])
@@ -41,7 +41,7 @@ class ExampleNotebooksTC(unittest.TestCase):
             normalized_expected_outputs = list(map(normalize_output, expected_outputs))
             normalized_actual_outputs = list(map(normalize_output, actual_outputs))
             self.assertListEqual(normalized_expected_outputs, normalized_actual_outputs)
-    
+
             expected_execution_count = expected_cell.get('execution_count', None)
             actual_execution_count = actual_cell.get('execution_count', None)
             self.assertEqual(expected_execution_count, actual_execution_count)
@@ -70,6 +70,7 @@ class ExampleNotebooksTC(unittest.TestCase):
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
+    #suite.addTest(ExampleNotebooksTC("test_example_scheme"))
     suite.addTest(unittest.makeSuite(ExampleNotebooksTC))
     runner = unittest.TextTestRunner(verbosity=3)
     runner.run(suite)
