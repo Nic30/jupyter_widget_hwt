@@ -1,0 +1,33 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+  py: nic30/python-all-in-1@0.2.44
+
+jobs:
+  install-test-deploy:
+    executor: python/default
+    resource_class: small
+    steps:
+      - checkout
+      - run: sudo apt install -y nodejs npm
+      - run:
+          command: |
+            node -v;
+            npm -v;
+      - run: pip3 install -r https://raw.githubusercontent.com/Nic30/hwtLib/master/doc/requirements.txt git+git://github.com/Nic30/hwtLib#egg=hwtLib
+      # - python/load-cache
+      - py/install-setup-py
+      # - python/save-cache
+      - py/test-and-coverage
+      - py/deploy-pypi-on-tag
+
+workflows:
+  main:
+    jobs:
+      - install-test-deploy:
+          context:
+            - pypi
+          filters:
+            tags:
+              only: /.*/
