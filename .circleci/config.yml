@@ -17,7 +17,7 @@ jobs:
             npm -v;
       - run: pip3 install pip -U
       - run: pip3 install setuptools -U
-      - run: pip3 install -r https://raw.githubusercontent.com/Nic30/hwtLib/master/doc/requirements.txt git+git://github.com/Nic30/hwtLib#egg=hwtLib git+git://github.com/Nic30/hwtGraph.git@master#egg=hwtGraph
+      - run: pip3 install -r https://raw.githubusercontent.com/Nic30/hwtLib/master/doc/requirements.txt git+git://github.com/Nic30/hwtLib#egg=hwtLib git+git://github.com/Nic30/hwtGraph.git@master#egg=hwtGraph pytest pebble xmltodict nbconvert>=6.0.7 nbclient
       # - python/load-cache
       - py/install-setup-py
       # - python/save-cache
