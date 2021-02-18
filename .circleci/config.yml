@@ -15,7 +15,7 @@ jobs:
           command: |
             node -v;
             npm -v;
-      - run: pip3 install -r https://raw.githubusercontent.com/Nic30/hwtLib/master/doc/requirements.txt git+git://github.com/Nic30/hwtLib#egg=hwtLib
+      - run: pip3 install -r https://raw.githubusercontent.com/Nic30/hwtLib/master/doc/requirements.txt git+git://github.com/Nic30/hwtLib#egg=hwtLib git+git://github.com/Nic30/hwtGraph.git@master#egg=hwtGraph
       # - python/load-cache
       - py/install-setup-py
       # - python/save-cache
