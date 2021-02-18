@@ -152,7 +152,8 @@ setup(
     ],
     tests_require=[
         "pytest", "pebble", "xmltodict", # test deps of nbconvert
-        "nbconvert>=6.0.7"
+        "nbconvert>=6.0.7", "nbclient",
+        "hwtLib",
     ],
     test_suite="tests",
     packages=find_packages(),
@@ -181,5 +182,4 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
-    test_requires=["nbclient", "hwtLib"]
 )
