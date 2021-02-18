@@ -1,5 +1,5 @@
-jupyter_widget_hwt [![Build Status](https://travis-ci.org/Nic30/jupyter_widget_hwt.svg?branch=master)](https://travis-ci.org/Nic30/jupyter_widget_hwt)
-===============================
+jupyter_widget_hwt [![CircleCI](https://circleci.com/gh/Nic30/jupyter_widget_hwt.svg?style=svg)](https://circleci.com/gh/Nic30/jupyter_widget_hwt)
+==================================================================================================================================================
 
 
 A Jupyter witdgets for visualization of hwt based circuits.
