@@ -19,7 +19,7 @@ jobs:
       - run: pip3 install setuptools -U
       - run: pip3 install -r https://raw.githubusercontent.com/Nic30/hwtLib/master/doc/requirements.txt
       - run: pip3 install git+git://github.com/Nic30/hwtLib#egg=hwtLib git+git://github.com/Nic30/hwtGraph.git@master#egg=hwtGraph pytest pebble xmltodict nbconvert>=6.0.7 nbclient ipywidgets jupyter_contrib_nbextensions
-      - run: jupyter contrib nbextension install
+      - run: jupyter contrib nbextension install --user
       - run: jupyter nbextension enable --py widgetsnbextension
       # - python/load-cache
       - py/install-setup-py
