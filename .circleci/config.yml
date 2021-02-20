@@ -13,6 +13,7 @@ jobs:
       - run: sudo apt install -y nodejs npm
       - run:
           command: |
+            python3 --version;
             node -v;
             npm -v;
       - run: pip3 install pip -U
@@ -23,6 +24,7 @@ jobs:
       - run: jupyter nbextension enable --py widgetsnbextension
       # - python/load-cache
       - py/install-setup-py
+      - run: pip3 freeze
       # - python/save-cache
       - py/test-and-coverage
       - py/deploy-pypi-on-tag

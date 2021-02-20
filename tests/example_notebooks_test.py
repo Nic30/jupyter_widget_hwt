@@ -29,6 +29,7 @@ class ExampleNotebooksTC(unittest.TestCase):
         self.assert_notebooks_equal(input_nb, output_nb)
 
     def assert_notebooks_equal(self, expected, actual):
+        self.maxDiff = None
         # based on nbclient.tests.test_client.assert_notebooks_equal
         expected_cells = expected['cells']
         actual_cells = actual['cells']
