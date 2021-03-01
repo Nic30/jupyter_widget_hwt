@@ -34,7 +34,7 @@ RUN jupyter nbextension enable --py widgetsnbextension
 
 # install fresh dependencies from git (not required, there are pip packages)
 RUN git clone --depth=1 https://github.com/Nic30/hwtLib.git
-RUN pip3 install -r hwtLib/doc/requirements.hwt.txt
+RUN pip3 install -r hwtLib/doc/requirements.txt
 RUN pip3 install git+git://github.com/Nic30/hwtLib.git@master#egg=hwtLib
 RUN pip3 install git+git://github.com/Nic30/hwtGraph.git@master#egg=hwtGraph
 
