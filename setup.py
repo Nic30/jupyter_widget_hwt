@@ -165,7 +165,7 @@ setup(
         'jsdeps': NPM,
     },
     author='Michal Orsak',
-    author_email='michal.o.socials@gmail.com',
+    author_email='Nic30original@gmail.com',
     url='https://github.com/Nic30/jupyter_widget_hwt',
     keywords=[
         'ipython',
