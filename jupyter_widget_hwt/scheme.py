@@ -3,7 +3,6 @@ from typing import Union
 
 from hwt.hdl.operator import Operator
 from hwt.hdl.portItem import HdlPortItem
-from hwt.hdl.statement import HdlStatement
 from hwt.hdl.value import HValue
 from hwt.synthesizer.componentPath import ComponentPath
 from hwt.synthesizer.interface import Interface
@@ -16,6 +15,7 @@ from hwtGraph.elk.fromHwt.defauts import DEFAULT_PLATFORM, \
     DEFAULT_LAYOUT_OPTIMIZATIONS
 import ipywidgets as widgets
 from hwtGraph.elk.fromHwt.extractSplits import InterfaceSplitInfo
+from hwt.hdl.statements.statement import HdlStatement
 
 
 class UpdateAccumulator():
@@ -85,13 +85,13 @@ class HwtSchemeWidget(widgets.DOMWidget):
         self._update_accumulator = None
         if u is not None:
             self._bind_unit(u)
-    
+
     def _bind_unit(self, u: Unit):
         synthesised(u, DEFAULT_PLATFORM)
         self.graph = UnitToLNode(u, optimizations=DEFAULT_LAYOUT_OPTIMIZATIONS)
         self.json_idStore = ElkIdStore()
         self.value = self.graph.toElkJson(self.json_idStore)
-    
+
     def _init_hwt_obj_to_json_mapping_dicts(self):
         # 1:1
         id_to_j_obj = {}
@@ -117,7 +117,7 @@ class HwtSchemeWidget(widgets.DOMWidget):
                 port_signal = ComponentPath(*key[:-1], port_signal)
 
             hwt_obj_to_j_obj_ids.setdefault(port_signal, set()).add(j_id)
-            
+
         def collect_l_obj(j_id, key, _hwt_obj):
             if _hwt_obj is None or isinstance(_hwt_obj, (HValue, HdlStatement)):
                 return
@@ -134,7 +134,7 @@ class HwtSchemeWidget(widgets.DOMWidget):
             else:
                 print("Can not find in json", key)
                 # raise NotImplementedError(key, _hwt_obj)
-        
+
         # need_to_convert_component_paths = False
         for l_obj, j_id in self.json_idStore.items():
             if isinstance(l_obj, ComponentPath):
@@ -147,7 +147,7 @@ class HwtSchemeWidget(widgets.DOMWidget):
                         collect_l_obj(j_id, key_prefix / _hwt_obj0, _hwt_obj0)
                 else:
                     collect_l_obj(j_id, key, _hwt_obj)
-                
+
             else:
                 _hwt_obj = l_obj.originObj
                 if type(_hwt_obj) is tuple:
@@ -183,7 +183,7 @@ class HwtSchemeWidget(widgets.DOMWidget):
         for j_id in j_ids:
             j_obj = self.id_to_j_obj[str(j_id)]
             j_obj["hwMeta"]["cssStyle"] = style_str
-        
+
         if not self._update_accumulator:
             self._trigger_update()
 
